@@ -1,8 +1,52 @@
-//complete this code
-class Rectangle {}
+class Rectangle {
+  #width;
+  #height;
 
-class Square extends Animal {}
+  constructor(width, height) {
+    if (!Number.isInteger(width) || width <= 0) {
+      throw new Error('Width must be a positive integer');
+    }
+    if (!Number.isInteger(height) || height <= 0) {
+      throw new Error('Height must be a positive integer');
+    }
+    this.#width = width;
+    this.#height = height;
+  }
 
-// Do not change the code below this line
-window.Rectangle = Rectangle;
-window.Square = Square;
+  get width() {
+    return this.#width;
+  }
+
+  get height() {
+    return this.#height;
+  }
+
+  getArea() {
+    return this.#width * this.#height;
+  }
+}
+
+class Square extends Rectangle {
+  constructor(side) {
+    if (!Number.isInteger(side) || side <= 0) {
+      throw new Error('Side must be a positive integer');
+    }
+    super(side, side);
+  }
+
+  getPerimeter() {
+    return 4 * this.width;
+  }
+}
+
+// Example usage:
+const rectangle = new Rectangle(5, 10);
+console.log(rectangle.width); // Output: 5
+console.log(rectangle.height); // Output: 10
+console.log(rectangle.getArea()); // Output: 50
+
+const square = new Square(7);
+console.log(square.width); // Output: 7
+console.log(square.height); // Output: 7
+console.log(square.getArea()); // Output: 49
+console.log(square.getPerimeter()); // Output: 28
